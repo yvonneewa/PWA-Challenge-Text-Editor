@@ -1,3 +1,4 @@
+import { request } from 'express';
 import { openDB } from 'idb';
 
 const initdb = async () =>
@@ -14,13 +15,13 @@ const initdb = async () =>
 
 // TODO: Add logic to a method that accepts some content and adds it to the database
 export const putDb = async (content) =>{
-
-  const db = await openDB('jate', 1);
-  const tx = db.transaction('jate', 'readwrite');
+  console.log ('put into the database')
+  const jateDb = await openDB('jate', 1);
+  const tx = jateDbdb.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
-  await store.add(content);
-  await tx.done;
-  console.error('putDb not implemented');
+  const request = store.put ({ id: id, jate: content})
+  const result = await request;
+  console.error('data saved', result);
 
 
 }
@@ -29,14 +30,14 @@ export const putDb = async (content) =>{
 
 // TODO: Add logic for a method that gets all the content from the database
 export const getDb = async () =>{
-
-  const db = await openDB('jate', 1);
+  console.log ('Get all from the database')
+  const jatedb = await openDB('jate', 1);
   const tx = db.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
-  const allContent = await store.getAll();
-  await tx.done;
-  console.error('getDb not implemented');
-  return allContent;
+  const request = store.getAll();
+  const result = await request;
+  console.error('result.value, result');
+  return result;
 }
   
   
